@@ -6,8 +6,9 @@
 #include "examples.h"
 #include "tests.cpp"
 
-bool linearSearch(int key, std::vector<int> vector){
-    for (int item : vector){
+// Prosta funkcja wyszukiwania liniowego zwracająca prawda/fałsz.
+bool linearSearch(int key, const std::vector<int> &vector){
+    for (const auto &item : vector){
         if (item == key) {
             return true;
         }
@@ -15,29 +16,8 @@ bool linearSearch(int key, std::vector<int> vector){
     return false;
 }
 
-void printMap(std::map<int, bool> map) {
-    for (auto const& [key, value] : map) {
-        std::cout << " " << key << ": " << value << "\n";
-    }
-}
-
-void printVector(std::vector<int> vector) {
-    for (int item : vector) {
-        std::cout << item << " ";
-    }
-    std:: cout << std::endl;
-}
-
-void print2DVector(std::vector<std::vector<int>> vector) {
-    for (const auto &row : vector) {
-        for (const auto &item: row) {
-            std::cout << item << " ";
-        }
-        std::cout << std::endl;
-    }
-}
-
-std::vector<int> transformMapKeysToVector(std::map<int, bool> map) {
+// Funkcja zwracająca tablicę kluczy z mapy.
+std::vector<int> transformMapKeysToVector(const std::map<int, bool> &map) {
     std::vector<int> vector;
     for (auto const& [key, value] : map) {
         if (value) {
@@ -47,28 +27,29 @@ std::vector<int> transformMapKeysToVector(std::map<int, bool> map) {
     return vector;
 }
 
+// Funkcja zwracająca tablicę ze wspólnymi elementami wszystkich wierszy.
 std::vector<int> getCommonElements(std::vector<std::vector<int>> vector) {
-    std::map<int, bool> appearanceToElement;
-    std::vector<int> commonElements;
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::high_resolution_clock::now(); // Timestamp do obliczenia czasu wykonywania funkcji.
+    std::map<int, bool> appearanceToElement; // Deklaracja mapy przechowującej klucze[elementy tablicy] i wartości[prawda/fałsz].
+    std::vector<int> commonElements; // Deklaracja tablicy, która będzie zwracana.
 
-    for(int item : vector[0]) { // Pętla for iterująca po każdym elemencie w pierwszej tablicy
-        for(unsigned int i = 0; i <= (int)vector.size() - 1; i++) { // Pętla for iterująca po każdej tablicy
-            if (linearSearch(item, vector[i])) { // Jeśli element występuje w i-tej tablicy
-                appearanceToElement[item] = true; // Ustaw jego wartość w mapie na prawdę
-            } else { // Jeśli element nie występuje w i-tej tablicy
-                appearanceToElement[item] = false; // Ustaw jego wartość w mapie na fałsz
+    for(const auto &item : vector[0]) { // Pętla for iterująca po każdym elemencie w pierwszej tablicy.
+        for(unsigned int i = 0; i <= (int)vector.size() - 1; i++) { // Pętla for iterująca po każdej tablicy.
+            if (linearSearch(item, vector[i])) { // Jeśli element występuje w i-tej tablicy.
+                appearanceToElement[item] = true; // Ustaw jego wartość w mapie na prawdę.
+            } else { // Jeśli element nie występuje w i-tej tablicy.
+                appearanceToElement[item] = false; // Ustaw jego wartość w mapie na fałsz.
                 break; // Przerwij pętlę.
             }
         }
     }
-    commonElements = transformMapKeysToVector(appearanceToElement); // Zamiana mapy na tablicę
+    commonElements = transformMapKeysToVector(appearanceToElement); // Zamiana kluczy[elementów wspólnych wszystkich tablic] mapy na tablicę do zwrócenia.
 
-    auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = duration_cast<std::chrono::milliseconds>(stop - start);
+    auto stop = std::chrono::high_resolution_clock::now(); // Timestamp do obliczenia czasu wykonywania funkcji.
+    auto duration = duration_cast<std::chrono::milliseconds>(stop - start); // Obliczenie czasu wykonywania funkcji w ms.
     std::cout << "Elapsed time: " << duration.count() << "ms" << std::endl;
 
-    return commonElements; // Zwrócenie wyniku
+    return commonElements; // Zwrócenie wyniku.
 }
 
 int main() {

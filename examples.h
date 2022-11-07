@@ -1,5 +1,6 @@
 #include <vector>
 
+// Przykładowe macierze 2-wymiarowe.
 // Jedna liczba się powtarza : 5.
 std::vector<std::vector<int>> example1 = {
         {2, 4, 3, 8, 5},
