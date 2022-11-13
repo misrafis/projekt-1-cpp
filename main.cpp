@@ -31,13 +31,22 @@ std::vector<int> transformMapKeysToVector(const std::map<int, bool> &map) {
     return vector;
 }
 
+// Funkcja wypisująca elementy tablicy.
+void printVector(const std::vector<int> &vector) {
+    std::cout << "Powtarzajace sie liczby: ";
+    for (const auto &item : vector) {
+        std::cout << item << " ";
+    }
+    std:: cout << std::endl << std::endl;
+}
+
 // Funkcja zwracająca tablicę ze wspólnymi elementami wszystkich wierszy.
 std::vector<int> getCommonElements(std::vector<std::vector<int>> vector) { // Jako argument przyjmujemy tablicę dwuwymiarową.
     auto start = std::chrono::high_resolution_clock::now(); // Timestamp do obliczenia czasu wykonywania funkcji.
     std::map<int, bool> appearanceToElement; // Deklaracja mapy przechowującej klucze[elementy tablicy] i wartości[prawda/fałsz].
     std::vector<int> commonElements; // Deklaracja tablicy, która będzie zwracana.
     for(const auto &item : vector[0]) { // Pętla for iterująca po każdym elemencie w pierwszej tablicy.
-        for(unsigned int i = 0; i <= (int)vector.size() - 1; i++) { // Pętla for iterująca po każdej tablicy.
+        for(unsigned int i = 1; i <= (int)vector.size() - 1; i++) { // Pętla for iterująca po każdej tablicy.
             if (linearSearch(item, vector[i])) { // Jeśli element występuje w i-tej tablicy.
                 appearanceToElement[item] = true; // Ustaw jego wartość w mapie na prawdę.
             } else { // Jeśli element nie występuje w i-tej tablicy.

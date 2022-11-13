@@ -1,0 +1,11 @@
+1. inicjuj tab[0...n][0...m]
+2. inicjuj wynik[]
+3. inicjuj mapa[klucz][wartość]
+4. dla i <- 1 do n powtarzaj
+5.	dla j <- 0 do długość(tab[i][m]) powtarzaj
+6.		jeżeli tab[i][j] znajduje się w tab[0] to
+			mapa[tab[0][i]][1]
+7.		w przeciwnym razie
+			mapa[tab[0][i]][0]
+8. do wynik[] dodaj każdy mapa[key][1]
+9. zwróć wynik[]
