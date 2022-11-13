@@ -6,6 +6,10 @@
 #include "examples.h"
 #include "tests.cpp"
 
+/*
+ * Sprawdź, które elementy tablicy dwuwymiarowej występują w każdym wierszu tej tablicy.
+ */
+
 // Prosta funkcja wyszukiwania liniowego zwracająca prawda/fałsz.
 bool linearSearch(int key, const std::vector<int> &vector){
     for (const auto &item : vector){
@@ -28,11 +32,10 @@ std::vector<int> transformMapKeysToVector(const std::map<int, bool> &map) {
 }
 
 // Funkcja zwracająca tablicę ze wspólnymi elementami wszystkich wierszy.
-std::vector<int> getCommonElements(std::vector<std::vector<int>> vector) {
+std::vector<int> getCommonElements(std::vector<std::vector<int>> vector) { // Jako argument przyjmujemy tablicę dwuwymiarową.
     auto start = std::chrono::high_resolution_clock::now(); // Timestamp do obliczenia czasu wykonywania funkcji.
     std::map<int, bool> appearanceToElement; // Deklaracja mapy przechowującej klucze[elementy tablicy] i wartości[prawda/fałsz].
     std::vector<int> commonElements; // Deklaracja tablicy, która będzie zwracana.
-
     for(const auto &item : vector[0]) { // Pętla for iterująca po każdym elemencie w pierwszej tablicy.
         for(unsigned int i = 0; i <= (int)vector.size() - 1; i++) { // Pętla for iterująca po każdej tablicy.
             if (linearSearch(item, vector[i])) { // Jeśli element występuje w i-tej tablicy.
@@ -46,19 +49,19 @@ std::vector<int> getCommonElements(std::vector<std::vector<int>> vector) {
     commonElements = transformMapKeysToVector(appearanceToElement); // Zamiana kluczy[elementów wspólnych wszystkich tablic] mapy na tablicę do zwrócenia.
 
     auto stop = std::chrono::high_resolution_clock::now(); // Timestamp do obliczenia czasu wykonywania funkcji.
-    auto duration = duration_cast<std::chrono::milliseconds>(stop - start); // Obliczenie czasu wykonywania funkcji w ms.
-    std::cout << "Elapsed time: " << duration.count() << "ms" << std::endl;
+    auto duration = duration_cast<std::chrono::microseconds>(stop - start); // Obliczenie czasu wykonywania funkcji w ms.
+    std::cout << "Czas wykonania: " << duration.count() << "us" << std::endl;
 
     return commonElements; // Zwrócenie wyniku.
 }
 
 int main() {
-    printVector(getCommonElements(example1) );
-    printVector(getCommonElements(example2) );
-    printVector(getCommonElements(example3) );
-    printVector(getCommonElements(example4) );
-    printVector(getCommonElements(example5) );
-    printVector(getCommonElements(example6) );
-    printVector(getCommonElements(getRandom2DVector(300, 120, 1000)) );
+    printVector(getCommonElements(example1));
+    printVector(getCommonElements(example2));
+    printVector(getCommonElements(example3));
+    printVector(getCommonElements(example4));
+    printVector(getCommonElements(example5));
+    printVector(getCommonElements(example6));
+    printVector(getCommonElements(getRandom2DVector(300, 120, 1000)));
     return 0;
 }

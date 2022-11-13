@@ -19,10 +19,11 @@ std::vector<std::vector<int>> getRandom2DVector(int range, int rows, int columns
 
 // Funkcja wypisująca elementy tablicy.
 void printVector(const std::vector<int> &vector) {
+    std::cout << "Powtarzajace sie liczby: ";
     for (const auto &item : vector) {
         std::cout << item << " ";
     }
-    std:: cout << std::endl;
+    std:: cout << std::endl << std::endl;
 }
 
 // Funkcja wypisująca elementy tablicy 2-wymiarowej.
