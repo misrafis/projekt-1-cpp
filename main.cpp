@@ -46,7 +46,7 @@ std::vector<int> getCommonElements(std::vector<std::vector<int>> vector) { // Ja
     std::map<int, bool> appearanceToElement; // Deklaracja mapy przechowującej klucze[elementy tablicy] i wartości[prawda/fałsz].
     std::vector<int> commonElements; // Deklaracja tablicy, która będzie zwracana.
     for(const auto &item : vector[0]) { // Pętla for iterująca po każdym elemencie w pierwszej tablicy.
-        for(unsigned int i = 1; i <= (int)vector.size() - 1; i++) { // Pętla for iterująca po każdej tablicy.
+        for(unsigned int i = 0; i <= (int)vector.size() - 1; i++) { // Pętla for iterująca po każdej tablicy.
             if (linearSearch(item, vector[i])) { // Jeśli element występuje w i-tej tablicy.
                 appearanceToElement[item] = true; // Ustaw jego wartość w mapie na prawdę.
             } else { // Jeśli element nie występuje w i-tej tablicy.
@@ -71,6 +71,6 @@ int main() {
     printVector(getCommonElements(example4));
     printVector(getCommonElements(example5));
     printVector(getCommonElements(example6));
-    printVector(getCommonElements(getRandom2DVector(300, 120, 1000)));
+    printVector(getCommonElements(getRandom2DVector(300, 120, 100)));
     return 0;
 }
